@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+  vpn:
+    image: davidcun/socks-openvpn:1.0
+    container_name: mdt-openvpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - USE_VPN_DNS=on
+      - SOCKS_PROXY=on
+      - SOCKS_LISTEN_ON=0.0.0.0
+      - SOCKS_PROXY_USERNAME=test
+      - SOCKS_PROXY_PASSWORD=test123
+#      - HTTP_PROXY=on
+#      - HTTP_PROXY_USERNAME=davy
+#      - HTTP_PROXY_PASSWORD=Mdt@132
+    volumes:
+      - /mnt/vpn:/data/vpn
+    ports:
+      - "11080:1080"
+#      - "18080:8080"
